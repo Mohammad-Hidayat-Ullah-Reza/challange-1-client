@@ -10,7 +10,8 @@ export const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch(`http://localhost:5000/sectors`),
+        loader: () =>
+          fetch(`https://interview-challange-1-server.vercel.app/sectors`),
       },
     ],
   },

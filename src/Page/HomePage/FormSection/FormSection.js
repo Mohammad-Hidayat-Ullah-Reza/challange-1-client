@@ -10,7 +10,7 @@ const FormSection = ({ sectors, refetch }) => {
   } = useForm();
 
   const handleFormSubmit = (data, e) => {
-    fetch(`http://localhost:5000/userData`, {
+    fetch(`https://interview-challange-1-server.vercel.app/userData`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -30,25 +30,35 @@ const FormSection = ({ sectors, refetch }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <div className="mb-10">
+      <h2 className="text-center text-2xl font-bold">
+        Please enter your name and pick the Sectors you are currently involved
+        in.
+      </h2>
+      <form
+        onSubmit={handleSubmit(handleFormSubmit)}
+        className="flex flex-col items-center"
+      >
         {/* ---------name--------- */}
 
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control w-full max-w-5xl">
           <label className="label">
-            <span className="label-text font-bold">Full Name</span>
+            <span className="label-text">Full Name</span>
           </label>
           <input
-            {...register("name", { required: true })}
+            {...register("name", { required: "Please enter your name" })}
             type="text"
             placeholder="Full Name"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-5xl"
           />
+          {errors.name && (
+            <p className="text-red-600 my-2">{errors.name?.message}</p>
+          )}
         </div>
 
         {/* ---------select--------- */}
 
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control w-full max-w-5xl">
           <label className="label">
             <span className="label-text">Select Sectors:</span>
           </label>
@@ -57,31 +67,31 @@ const FormSection = ({ sectors, refetch }) => {
             className="select select-bordered"
           >
             {sectors[0].sectors.map((s, i) => (
-              <option key={i}>{`${s}`}</option>
+              <option key={i} className="whitespace-pre">{`${s}`}</option>
             ))}
-            {/* <option>Star Wars</option>
-            <option>Harry Potter</option>
-            <option>Lord of the Rings</option>
-            <option>Planet of the Apes</option>
-            <option>Star Trek</option> */}
           </select>
         </div>
 
         {/* ---------checkbox--------- */}
 
-        <div className="form-control max-w-xs">
+        <div className="form-control max-w-5xl w-full">
           <label className="label cursor-pointer justify-start">
             <input
-              {...register("agreeToTerms", { required: true })}
+              {...register("agreeToTerms", {
+                required: "Please check the box",
+              })}
               type="checkbox"
               className="checkbox"
             />
             <span className="label-text ml-3">Agree to terms</span>
           </label>
+          {errors.agreeToTerms && (
+            <p className="text-red-600 mb-2">{errors.agreeToTerms?.message}</p>
+          )}
         </div>
 
         {/* ---------button--------- */}
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-block max-w-5xl">
           Submit
         </button>
       </form>
