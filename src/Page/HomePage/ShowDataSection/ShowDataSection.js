@@ -1,15 +1,28 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { toast } from "react-hot-toast";
 
-const ShowDataSection = () => {
-  const { data: allUserData = [], refetch } = useQuery({
-    queryKey: ["allUserData"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/userData`);
-      const data = await res.json();
-      return data;
-    },
-  });
+const ShowDataSection = ({ allUserData, refetch }) => {
+  const handleDelete = (id) => {
+    console.log(id);
+    if (id) {
+      fetch(`http://localhost:5000/userData`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            refetch();
+            toast.success("successfully deleted");
+          }
+        })
+        .catch((e) => console.log(e));
+    }
+  };
 
   console.log(allUserData);
   return (
@@ -34,19 +47,15 @@ const ShowDataSection = () => {
                 <td>{d.data.sectors}</td>
                 <td>
                   <button className="btn btn-sm">Edit</button>
-                  <button className="btn btn-sm">Delete</button>
+                  <button
+                    onClick={() => handleDelete(d._id)}
+                    className="btn btn-sm"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
-            {/* <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>
-                <button className="btn btn-sm">Edit</button>
-                <button className="btn btn-sm">Delete</button>
-              </td>
-            </tr> */}
           </tbody>
         </table>
       </div>

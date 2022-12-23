@@ -1,14 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
-const FormSection = ({ sectors }) => {
+const FormSection = ({ sectors, refetch }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = (data, e) => {
     fetch(`http://localhost:5000/userData`, {
       method: "POST",
       headers: {
@@ -17,7 +18,14 @@ const FormSection = ({ sectors }) => {
       body: JSON.stringify({ data }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          toast.success("successfully submitted");
+          refetch();
+        }
+        e.target.reset();
+      })
       .catch((e) => console.log(e));
   };
 
