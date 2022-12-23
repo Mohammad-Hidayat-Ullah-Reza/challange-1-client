@@ -19,7 +19,10 @@ const Home = () => {
   });
   return (
     <div className="p-2 md:p-10">
-      <h1 className="text-4xl text-center font-bold my-5 md:my-0">
+      <h1
+        data-aos="fade-down"
+        className="text-4xl text-center font-bold my-5 md:my-0 text-blue-900"
+      >
         Challenge 1
       </h1>
       <div className="p-2 md:p-10">

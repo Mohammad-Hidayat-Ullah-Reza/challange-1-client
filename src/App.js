@@ -1,7 +1,9 @@
 import { Toaster } from "react-hot-toast";
 import { RouterProvider } from "react-router-dom";
-import "./App.css";
 import { routes } from "./Routes/Routes/Routes";
+import Aos from "aos";
+import "aos/dist/aos.css";
+Aos.init();
 
 function App() {
   return (

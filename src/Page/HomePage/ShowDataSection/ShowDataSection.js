@@ -37,7 +37,11 @@ const ShowDataSection = ({ allUserData, refetch, sectors }) => {
 
   console.log(userId, userData);
   return (
-    <div className="max-w-5xl w-full mx-auto">
+    <div
+      data-aos="zoom-in-right"
+      data-aos-duration="1500"
+      className="max-w-5xl w-full mx-auto p-2 md:p-10 shadow-xl rounded-xl"
+    >
       <h2 className="text-center text-2xl font-bold my-5"> All Users Data</h2>
       <div className="mx-auto w-full">
         <div className="overflow-x-auto">

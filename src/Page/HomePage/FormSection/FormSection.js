@@ -30,7 +30,11 @@ const FormSection = ({ sectors, refetch }) => {
   };
 
   return (
-    <div className="mb-10">
+    <div
+      data-aos="zoom-in-left"
+      data-aos-duration="1500"
+      className="mb-10 w-full max-w-5xl mx-auto p-2 md:p-10 shadow-xl rounded-xl"
+    >
       <h2 className="text-center text-2xl font-bold">
         Please enter your name and pick the Sectors you are currently involved
         in.
@@ -41,7 +45,7 @@ const FormSection = ({ sectors, refetch }) => {
       >
         {/* ---------name--------- */}
 
-        <div className="form-control w-full max-w-5xl">
+        <div className="form-control w-full">
           <label className="label">
             <span className="label-text">Full Name</span>
           </label>
